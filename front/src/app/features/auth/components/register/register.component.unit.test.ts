@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,7 +10,7 @@ import { expect } from '@jest/globals';
 
 import { RegisterComponent } from './register.component';
 
-describe('RegisterComponent', () => {
+describe('RegisterComponent Unit test suite', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
 
@@ -20,7 +20,7 @@ describe('RegisterComponent', () => {
       imports: [
         BrowserAnimationsModule,
         HttpClientModule,
-        ReactiveFormsModule,  
+        ReactiveFormsModule,
         MatCardModule,
         MatFormFieldModule,
         MatIconModule,
