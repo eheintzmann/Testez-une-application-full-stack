@@ -4,7 +4,6 @@ import { expect } from '@jest/globals';
 import { SessionApiService } from './session-api.service';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { Session } from '../interfaces/session.interface';
-import { HttpResponse } from "@angular/common/http";
 
 describe('SessionApiService Unit test suite', () => {
   const session1 : Session  = {
@@ -84,8 +83,6 @@ describe('SessionApiService Unit test suite', () => {
   });
 
   it('should return anything', () => {
-    const deletedSession: Session = session1;
-
     sessionApiService.delete('1')
       .subscribe((next: any) =>
         expect(next).toEqual(expect.anything())
