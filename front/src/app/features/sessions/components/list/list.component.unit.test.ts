@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,8 +5,9 @@ import { expect } from '@jest/globals';
 import { SessionService } from 'src/app/services/session.service';
 
 import { ListComponent } from './list.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('ListComponent', () => {
+describe('ListComponent Unit test suite', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
 
@@ -20,7 +20,7 @@ describe('ListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ListComponent],
-      imports: [HttpClientModule, MatCardModule, MatIconModule],
+      imports: [HttpClientTestingModule, MatCardModule, MatIconModule],
       providers: [{ provide: SessionService, useValue: mockSessionService }]
     })
       .compileComponents();
@@ -33,4 +33,9 @@ describe('ListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should return expected session information', () => {
+    expect(component.user).toEqual(mockSessionService.sessionInformation);
+  });
+
 });
