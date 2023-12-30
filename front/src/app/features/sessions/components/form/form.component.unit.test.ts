@@ -15,7 +15,7 @@ import { SessionApiService } from '../../services/session-api.service';
 
 import { FormComponent } from './form.component';
 
-describe('FormComponent', () => {
+describe('FormComponent Unit test suite', () => {
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
 
@@ -23,7 +23,7 @@ describe('FormComponent', () => {
     sessionInformation: {
       admin: true
     }
-  } 
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -35,7 +35,7 @@ describe('FormComponent', () => {
         MatIconModule,
         MatFormFieldModule,
         MatInputModule,
-        ReactiveFormsModule, 
+        ReactiveFormsModule,
         MatSnackBarModule,
         MatSelectModule,
         BrowserAnimationsModule
