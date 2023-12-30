@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -9,29 +9,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { expect } from '@jest/globals';
 
 import { RegisterComponent } from './register.component';
+import { HarnessLoader } from "@angular/cdk/testing";
+import { MatButtonHarness } from "@angular/material/button/testing";
+import { MatInputHarness } from "@angular/material/input/testing";
+import { TestbedHarnessEnvironment } from "@angular/cdk/testing/testbed";
 
 describe('RegisterComponent Integration test suite', () => {
+  let loader: HarnessLoader;
   let fixture: ComponentFixture<RegisterComponent>;
-  let registerElement: HTMLElement;
-  let firstNameElement: HTMLInputElement | null;
-  let lastNameElement: HTMLInputElement | null;
-  let emailElement: HTMLInputElement | null;
-  let passwordElement: HTMLInputElement | null;
-  let submitButton: HTMLButtonElement | null;
 
-  const setValues = (firstName: string, lastName: string, email: string, password: string) => {
-    firstNameElement!.setRangeText(firstName);
-    lastNameElement!.setRangeText(lastName);
-    emailElement!.setRangeText(email);
-    passwordElement!.setRangeText(password);
+  let firstNameInput: MatInputHarness;
+  let lastNameInput: MatInputHarness;
+  let emailEInput: MatInputHarness;
+  let passwordInput: MatInputHarness;
+  let submitButton: MatButtonHarness;
 
-    firstNameElement!.dispatchEvent(new Event('input'));
-    lastNameElement!.dispatchEvent(new Event('input'));
-    emailElement!.dispatchEvent(new Event('input'));
-    passwordElement!.dispatchEvent(new Event('input'));
+  const setValues = async (firstName: string, lastName: string, email: string, password: string) => {
+    await firstNameInput.setValue(firstName);
+    await lastNameInput.setValue(lastName);
+    await emailEInput.setValue(email);
+    await passwordInput.setValue(password);
 
-    fixture.detectChanges();
-    flush();
+    return;
   }
 
   beforeEach(async () => {
@@ -51,70 +50,89 @@ describe('RegisterComponent Integration test suite', () => {
 
     fixture = TestBed.createComponent(RegisterComponent);
     fixture.detectChanges();
+    loader = TestbedHarnessEnvironment.loader(fixture);
 
-    registerElement = fixture.nativeElement;
-    firstNameElement = registerElement.querySelector('input[formControlName="firstName"]');
-    lastNameElement = registerElement.querySelector('input[formControlName="lastName"]');
-    emailElement = registerElement.querySelector('input[formControlName="email"]');
-    passwordElement = registerElement.querySelector('input[formControlName="password"]');
-    submitButton = registerElement.querySelector('button[type="submit"]');
+    firstNameInput = await loader.getHarness<MatInputHarness>(MatInputHarness.with({selector: 'input[formControlName="firstName"]'}));
+    lastNameInput = await loader.getHarness<MatInputHarness>(MatInputHarness.with({selector: 'input[formControlName="lastName"]'}));
+    emailEInput= await loader.getHarness<MatInputHarness>(MatInputHarness.with({selector: 'input[formControlName="email"]'}));
+    passwordInput = await loader.getHarness<MatInputHarness>(MatInputHarness.with({selector: 'input[formControlName="password"]'}));
+    submitButton = await loader.getHarness<MatButtonHarness>(MatButtonHarness.with({selector:'button[type="submit"]'}));
   });
 
-  it('should hide #Submit if #FistName is empty', fakeAsync(() => {
-    setValues( '', 'LastName', 'test@test.com', 'password')
-    expect(submitButton!.disabled).toBeTruthy();
-  }));
+  it('should hide #Submit if #FistName is empty', async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
 
-  it('should hide #Submit if #FirstName is too short', fakeAsync(() => {
-    setValues('1', 'LastName', 'test@test.com', 'password')
-    expect(submitButton!.disabled).toBeTruthy();
-  }));
+    await setValues('', 'LastName', 'test@test.com', 'password')
+    expect(await submitButton.isDisabled()).toBeTruthy();
+  });
 
-  it('should hide #Submit if #FirstName is too long', fakeAsync(() => {
-    setValues('123456789012345678901', 'LastName', 'test@test.com', 'password')
-    expect(submitButton!.disabled).toBeTruthy();
-  }));
+  it('should hide #Submit if #FirstName is too short', async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
 
-  it('should hide #Submit if #LastName is empty', fakeAsync(() => {
-    setValues( 'FirstName', '', 'test@test.com', 'password')
-    expect(submitButton!.disabled).toBeTruthy();
-  }));
+    await setValues('1', 'LastName', 'test@test.com', 'password')
+    expect(await submitButton.isDisabled()).toBeTruthy();
+  });
 
-  it('should hide #Submit if #LastName is too short', fakeAsync(() => {
-    setValues('FirstName', '1', 'test@test.com', 'password')
-    expect(submitButton!.disabled).toBeTruthy();
-  }));
+  it('should hide #Submit if #FirstName is too long', async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
 
-  it('should hide #Submit if #LastName is too long', fakeAsync(() => {
-    setValues('FirstName', '123456789012345678901', 'test@test.com', 'password')
-    expect(submitButton!.disabled).toBeTruthy();
-  }));
+    await setValues('123456789012345678901', 'LastName', 'test@test.com', 'password')
+    expect(await submitButton.isDisabled()).toBeTruthy();
+  });
 
-  it('should hide #Submit if #Email is empty',  fakeAsync(() => {
-    setValues( 'FirstName', 'LastName', '', 'password')
-    expect(submitButton!.disabled).toBeTruthy();
-  }));
+  it('should hide #Submit if #LastName is empty', async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
 
-  it('should hide #Submit if #Email is not valid',  fakeAsync(() => {
-    setValues( 'FirstName', 'LastName', 'Invalid', 'password')
-    expect(submitButton!.disabled).toBeTruthy();
-  }));
+    await setValues('FirstName', '', 'test@test.com', 'password')
+    expect(await submitButton.isDisabled()).toBeTruthy();
+  });
 
+  it('should hide #Submit if #LastName is too short', async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
 
-  it('should hide #Submit if #Password is empty',  fakeAsync(() => {
-    setValues( 'FirstName', 'LastName', 'test@test.com', '')
-    expect(submitButton!.disabled).toBeTruthy();
-  }));
+    await setValues('FirstName', '1', 'test@test.com', 'password')
+    expect(await submitButton.isDisabled()).toBeTruthy();
+  });
 
-  it('should hide #Submit if #Password is too short',  fakeAsync(() => {
-    setValues( 'FirstName', 'LastName', 'test@test.com', '1')
-    expect(submitButton!.disabled).toBeTruthy();
-  }));
+  it('should hide #Submit if #LastName is too long', async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
 
-  it('should not hide #Submit',  fakeAsync(() => {
-    setValues( 'FirstName', 'LastName', 'test@test.com', 'password')
-    expect(submitButton!.disabled).toBeFalsy();
-  }));
+    await setValues('FirstName', '123456789012345678901', 'test@test.com', 'password')
+    expect(await submitButton.isDisabled()).toBeTruthy();
+  });
 
+  it('should hide #Submit if #Email is empty',  async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
+
+    await setValues('FirstName', 'LastName', '', 'password')
+    expect(await submitButton.isDisabled()).toBeTruthy();
+  });
+
+  it('should hide #Submit if #Email is not valid',  async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
+
+    await setValues('FirstName', 'LastName', 'Invalid', 'password')
+    expect(await submitButton.isDisabled()).toBeTruthy();
+  });
+
+  it('should hide #Submit if #Password is empty', async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
+
+    await setValues('FirstName', 'LastName', 'test@test.com', '')
+    expect(await submitButton.isDisabled()).toBeTruthy();
+  });
+
+  it('should hide #Submit if #Password is too short', async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
+
+    await setValues('FirstName', 'LastName', 'test@test.com', '1')
+    expect(await submitButton.isDisabled()).toBeTruthy();
+  });
+
+  it('should not hide #Submit',  async () => {
+    expect(await submitButton.isDisabled()).toBeTruthy();
+
+    await setValues('FirstName', 'LastName', 'test@test.com', 'password')
+    expect(await submitButton.isDisabled()).toBeFalsy();
+  });
 });
-
