@@ -12,7 +12,7 @@ import { SessionService } from 'src/app/services/session.service';
 
 import { LoginComponent } from './login.component';
 
-describe('LoginComponent', () => {
+describe('LoginComponent Unit test suite', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
