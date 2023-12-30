@@ -3,7 +3,7 @@ import { expect } from '@jest/globals';
 
 import { SessionService } from './session.service';
 
-describe('SessionService', () => {
+describe('SessionService Unit test suite', () => {
   let service: SessionService;
 
   beforeEach(() => {
@@ -14,4 +14,11 @@ describe('SessionService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-});
+
+  it('should return false', () => {
+    service.$isLogged().subscribe((value: boolean) => {
+      expect(value).toEqual(false);
+    });
+  });
+
+})
