@@ -10,7 +10,7 @@ import { expect } from '@jest/globals';
 
 import { MeComponent } from './me.component';
 
-describe('MeComponent', () => {
+describe('MeComponent Unit test suite', () => {
   let component: MeComponent;
   let fixture: ComponentFixture<MeComponent>;
 
