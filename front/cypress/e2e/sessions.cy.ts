@@ -7,8 +7,8 @@ describe('Sessions spec', () => {
 
   beforeEach(() => {
     sessionsPage = new SessionsPage();
-    sessionsPage.visit();
     loginPage = new LoginPage();
+    sessionsPage.visit();
   });
 
   describe('As user', () => {
@@ -21,7 +21,7 @@ describe('Sessions spec', () => {
       // Test sessions list
       sessionsPage.elements.matCardItems()
         .should(`have.length`, sessionsPage.fixtures.sessionsData.length)
-        .each((item, index) => {
+        .each((item, index): void => {
           expect(item.find('mat-card-title')).to.contain(sessionsPage.fixtures.sessionsData[index].name);
           expect(item.find('mat-card-content p')).to.contain(sessionsPage.fixtures.sessionsData[index].description);
           expect(item.find('mat-card-actions button:nth-child(1) span.ml1')).to.contain('Detail');
