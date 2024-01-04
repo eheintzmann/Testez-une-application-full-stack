@@ -1,27 +1,24 @@
+import { LoginPage } from '../pages/login.page';
+
 describe('Login spec', () => {
-  it('Login successfull', () => {
-    cy.visit('/login')
+  let page: LoginPage
 
-    cy.intercept('POST', '/api/auth/login', {
-      body: {
-        id: 1,
-        username: 'userName',
-        firstName: 'firstName',
-        lastName: 'lastName',
-        admin: true
-      },
-    })
+  beforeEach(() => {
+    page = new LoginPage();
+    page.visit();
+  })
 
-    cy.intercept(
-      {
-        method: 'GET',
-        url: '/api/session',
-      },
-      []).as('session')
 
-    cy.get('input[formControlName=email]').type("yoga@studio.com")
-    cy.get('input[formControlName=password]').type(`${"test!1234"}{enter}{enter}`)
+  it('Login successful', () => {
+    page.logIn(page.fixtures.userData.username, 'test!123')
 
     cy.url().should('include', '/sessions')
   })
-});
+
+
+  it('Bad credentials', () => {
+    page.logIn('bad@email.com', 'test!123');
+
+    page.elements.errorMessage().should('have.text', 'An error occurred');
+  })
+})
