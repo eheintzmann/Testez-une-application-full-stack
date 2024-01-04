@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "name": "Session 1",
+    "description": "Description 1",
+    "date": "2001/01/01",
+    "teacher_id": 0,
+    "users": [0]
+  },
+  {
+    "id": 1,
+    "name": "Session 2",
+    "description": "Description 2",
+    "date": "2001/01/02",
+    "teacher_id": 0,
+    "users": [0]
+  },
+  {
+    "id": 2,
+    "name": "Session 3",
+    "description": "Description 3",
+    "date": "2001/01/03",
+    "teacher_id": 0,
+    "users": [0]
+  }
+]
