@@ -16,6 +16,7 @@ describe('Register spec', () => {
       page.fixtures.userData.username,
       'test!123'
     )
+    cy.wait('@register');
 
     cy.url().should('include', '/login')
   })

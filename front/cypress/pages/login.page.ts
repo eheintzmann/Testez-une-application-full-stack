@@ -20,21 +20,21 @@ export class LoginPage {
   constructor() {
     cy.fixture('user').then((data: any) : void => {
       this.fixtures.userData = data;
-    });
 
-    cy.fixture('admin').then((data: any) : void => {
-      this.fixtures.adminData = data;
-    });
+      cy.fixture('admin').then((data: any) : void => {
+        this.fixtures.adminData = data;
 
-    cy.intercept({method: 'POST', url: '/api/auth/login'}, (req) : void => {
-      if (req.body.email === this.fixtures.userData.username) {
-        req.reply(this.fixtures.userData);
-      } else if (req.body.email === this.fixtures.adminData.username) {
-        req.reply(this.fixtures.adminData);
-      } else {
-        req.reply({ statusCode: 403 });
-      }
-    })
+        cy.intercept({method: 'POST', url: '/api/auth/login'}, (req) : void => {
+          if (req.body.email === this.fixtures.userData.username) {
+            req.reply(this.fixtures.userData);
+          } else if (req.body.email === this.fixtures.adminData.username) {
+            req.reply(this.fixtures.adminData);
+          } else {
+            req.reply({ statusCode: 403 });
+          }
+        }).as('login');
+      });
+    });
   }
 
   logIn(email: string, password: string) {

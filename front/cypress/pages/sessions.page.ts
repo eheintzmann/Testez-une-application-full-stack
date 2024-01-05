@@ -7,23 +7,28 @@ export class SessionsPage {
     detailBtns : () => cy.get('mat-card.item mat-card-actions button')
   }
 
-  fixtures : {
-    sessionsData : any;
-  } = {
-    sessionsData: undefined
-  }
+  fixtures : { sessionsData : any  } = { sessionsData: undefined }
 
   constructor() {
-    cy.fixture('sessions').then((data: any) : void => {
+    cy.fixture('sessions').then((data: any): void => {
       this.fixtures.sessionsData = data;
-    });
 
-    cy.intercept({
-        method: 'GET',
+      cy.intercept({
+          method: `GET`,
+          url: `/api/session`
+        }, (req): void => req.reply(this.fixtures.sessionsData)
+      ).as('sessions');
+
+      cy.intercept({
+        method: 'POST',
         url: '/api/session'
-      }, (req) : void  => req.reply(this.fixtures.sessionsData)
-    );
+      }, (req): void => {
+        this.fixtures.sessionsData.push(req.body);
+        req.reply({statusCode: 201});
+      }).as('post-sessions');
+    });
   }
+
 
   visit(): void {
     cy.visit(this.url);

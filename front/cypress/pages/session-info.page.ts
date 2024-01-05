@@ -18,23 +18,23 @@ export class SessionInformationsPage {
   constructor() {
     cy.fixture('sessions').then((data: any) : void => {
       this.fixtures.sessionsData = data;
+
+      cy.intercept({
+          method: 'GET',
+          url: '/api/session/0'
+        }, (req) : void  => req.reply(this.fixtures.sessionsData[0])
+      ).as('session0');
     });
 
-    cy.fixture('teacher').then((data: any) : void => {
+    cy.fixture('teachers').then((data: any) : void => {
       this.fixtures.teacherData = data;
+
+      cy.intercept({
+          method: 'GET',
+          url: `/api/teacher/0`
+        }, (req) : void  => req.reply(this.fixtures.teacherData[0])
+      ).as('teacher0');
     });
-
-    cy.intercept({
-        method: 'GET',
-        url: '/api/session/0'
-      }, (req) : void  => req.reply(this.fixtures.sessionsData[0])
-    );
-
-    cy.intercept({
-        method: 'GET',
-        url: `/api/teacher/0`
-      }, (req) : void  => req.reply(this.fixtures.teacherData)
-    );
   }
 
   visit(): void {

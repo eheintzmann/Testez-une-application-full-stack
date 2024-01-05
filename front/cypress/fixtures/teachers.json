@@ -1,0 +1,16 @@
+[
+  {
+    "id": 0,
+    "lastName": "Smith",
+    "firstName": "John",
+    "createdAt": "2001/01/01",
+    "updatedAt": "2001/01/01"
+  },
+  {
+    "id": 1,
+    "lastName": "Smith",
+    "firstName": "Jane",
+    "createdAt": "2001/01/01",
+    "updatedAt": "2001/01/01"
+  }
+]

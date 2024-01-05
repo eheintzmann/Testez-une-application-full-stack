@@ -14,6 +14,9 @@ describe('Sessions spec', () => {
   describe('As user', () => {
     beforeEach(() => {
       loginPage.logIn(loginPage.fixtures.userData.username, 'text!123');
+      cy.wait('@login');
+      cy.wait('@sessions');
+
     });
 
     it('Show sessions list', () => {
@@ -33,6 +36,8 @@ describe('Sessions spec', () => {
   describe('As admin', () => {
     beforeEach(() => {
       loginPage.logIn(loginPage.fixtures.adminData.username, 'text!123');
+      cy.wait('@login');
+      cy.wait('@sessions');
     });
 
     it('Show Create and Edit buttons', () => {
