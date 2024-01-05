@@ -34,7 +34,7 @@ describe('Session Edition spec', () : void => {
       cy.wait('@teachers');
 
       // Test Create button
-      sessionEditionPage.createSession(
+      sessionEditionPage.editSession(
         editedSession.name,
         editedSession.date,
         editedSession.description

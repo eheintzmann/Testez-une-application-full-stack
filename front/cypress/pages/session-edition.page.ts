@@ -40,7 +40,7 @@ export class SessionEditionPage {
     });
   }
 
-  createSession(name : string, date : string, description : string): void {
+  editSession(name : string, date : string, description : string): void {
      this.elements.nameInput().clear();
     this.elements.nameInput().type(name);
 
