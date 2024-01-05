@@ -11,7 +11,7 @@ describe('Logout spec', () : void => {
     logoutPage = new LogoutPage();
   });
 
-  describe('as user', ()  : void=> {
+  describe('As user', ()  : void=> {
     beforeEach(() => {
       loginPage.visit();
       loginPage.logIn(loginPage.fixtures.userData.username, 'test!123');

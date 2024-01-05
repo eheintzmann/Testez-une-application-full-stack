@@ -19,7 +19,7 @@ describe('Session Edition spec', () : void => {
     sessionEditionPage = new SessionEditionPage();
   });
 
-  describe('as admin', (): void => {
+  describe('As admin', (): void => {
 
 
     it('create new session', () : void => {

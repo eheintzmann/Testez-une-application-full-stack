@@ -18,7 +18,7 @@ describe('Session Creation spec', () : void => {
     sessionCreationPage = new SessionCreationPage();
   });
 
-  describe('as admin', (): void => {
+  describe('As admin', (): void => {
 
 
     it('create new session', (): void => {
