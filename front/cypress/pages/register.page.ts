@@ -1,14 +1,6 @@
 export class RegisterPage {
   url: string = '/register';
 
-  fixtures : {
-    userData: any,
-    adminData: any
-  } = {
-    userData: undefined,
-    adminData: undefined
-  };
-
   elements = {
     firstNameInput: () => cy.get('input[formControlName="firstName"]'),
     lastNameInput: () => cy.get('input[formControlName="lastName"]'),
@@ -16,20 +8,6 @@ export class RegisterPage {
     passwordInput: () => cy.get('input[formControlName="password"]'),
     submitBtn: () => cy.get(`button[type="submit"]`),
     errorMessage: () => cy.get('span.error')
-  }
-
-
-  constructor() {
-    cy.fixture('user').then((data: any): void => {
-      this.fixtures.userData = data;
-
-      cy.fixture('admin').then((data: any): void => {
-        this.fixtures.adminData = data;
-      });
-
-      cy.intercept({method: 'POST', url: '/api/auth/register'}, (req): void => req.reply({statusCode: 201})
-      ).as('register');
-    });
   }
 
   signUp(firstName: string, lastName: string, email: string, password: string) {

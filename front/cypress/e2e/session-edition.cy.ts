@@ -2,11 +2,13 @@ import { SessionsPage } from '../pages/sessions.page';
 import { LoginPage } from '../pages/login.page';
 import { SessionCreationPage } from "../pages/session-creation.page";
 import { SessionEditionPage } from "../pages/session-edition.page";
+import { DataFixtures } from "../fixtures/data.fixtures";
 
 describe('Session Edition spec', () : void => {
   let loginPage: LoginPage;
   let sessionsPage: SessionsPage;
   let sessionEditionPage: SessionEditionPage;
+  let fixtures : DataFixtures;
   const editedSession = {
     name: 'Edited session',
     date: '2011-01-01',
@@ -14,6 +16,7 @@ describe('Session Edition spec', () : void => {
   }
 
   beforeEach((): void => {
+    fixtures = new DataFixtures();
     loginPage = new LoginPage();
     sessionsPage = new SessionsPage();
     sessionEditionPage = new SessionEditionPage();
@@ -25,13 +28,13 @@ describe('Session Edition spec', () : void => {
     it('create new session', () : void => {
       sessionsPage.visit();
 
-      loginPage.logIn(loginPage.fixtures.adminData.email, loginPage.fixtures.adminData.password);
-      cy.wait('@login')
-      cy.wait('@sessions')
+      loginPage.logIn(fixtures.adminData.email, fixtures.adminData.password);
+      cy.wait('@getLogin')
+      cy.wait('@getSession')
 
       sessionsPage.elements.editBtns().first().click();
-      cy.wait('@session0')
-      cy.wait('@teachers');
+      cy.wait('@getSession0')
+      cy.wait('@getTeacher');
 
       // Test Create button
       sessionEditionPage.editSession(
@@ -39,11 +42,11 @@ describe('Session Edition spec', () : void => {
         editedSession.date,
         editedSession.description
       );
-      cy.wait('@put-sessions')
-      cy.wait('@sessions')
+      cy.wait('@putSession0')
+      cy.wait('@getSession')
 
       sessionsPage.elements.matCardItems()
-        .should(`have.length`, sessionsPage.fixtures.sessionsData.length)
+        .should(`have.length`, fixtures.sessionsData.length)
         .first().as('editedSession')
       cy.get('@editedSession').find('mat-card-title').should('contain.text', editedSession.name)
       cy.get('@editedSession').find('mat-card-content p').should('contain.text', editedSession.description);

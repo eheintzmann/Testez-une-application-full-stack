@@ -1,11 +1,13 @@
 import { SessionsPage } from '../pages/sessions.page';
 import { LoginPage } from '../pages/login.page';
 import { SessionCreationPage } from "../pages/session-creation.page";
+import { DataFixtures } from "../fixtures/data.fixtures";
 
 describe('Session Creation spec', () : void => {
   let loginPage: LoginPage;
   let sessionsPage: SessionsPage;
   let sessionCreationPage: SessionCreationPage;
+  let fixtures: DataFixtures;
   const createdSession = {
     name: 'Created session',
     date: '2001-01-01',
@@ -13,6 +15,7 @@ describe('Session Creation spec', () : void => {
   }
 
   beforeEach((): void => {
+    fixtures = new DataFixtures();
     loginPage = new LoginPage();
     sessionsPage = new SessionsPage();
     sessionCreationPage = new SessionCreationPage();
@@ -24,12 +27,12 @@ describe('Session Creation spec', () : void => {
     it('create new session', (): void => {
       sessionsPage.visit();
 
-      loginPage.logIn(loginPage.fixtures.adminData.email, loginPage.fixtures.adminData.password);
-      cy.wait('@login')
-      cy.wait('@sessions')
+      loginPage.logIn(fixtures.adminData.email, fixtures.adminData.password);
+      cy.wait('@getLogin')
+      cy.wait('@getSession')
 
       sessionsPage.elements.createBtn().click();
-      cy.wait('@teachers');
+      cy.wait('@getTeacher');
 
       // Test Create button
       sessionCreationPage.createSession(
@@ -37,11 +40,11 @@ describe('Session Creation spec', () : void => {
         createdSession.date,
         createdSession.description
       );
-      cy.wait('@post-sessions')
-      cy.wait('@sessions')
+      cy.wait('@postSession')
+      cy.wait('@getSession')
 
       sessionsPage.elements.matCardItems()
-        .should(`have.length`, sessionsPage.fixtures.sessionsData.length + 1)
+        .should(`have.length`, fixtures.sessionsData.length + 1)
         .last().as('newSession')
       cy.get('@newSession').find('mat-card-title').should('contain.text', createdSession.name)
       cy.get('@newSession').find('mat-card-content p').should('contain.text', createdSession.description);

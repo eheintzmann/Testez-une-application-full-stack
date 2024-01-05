@@ -1,11 +1,14 @@
 import { SessionsPage } from '../pages/sessions.page';
 import { LoginPage } from '../pages/login.page';
+import { DataFixtures } from "../fixtures/data.fixtures";
 
 describe('Sessions spec', () => {
   let sessionsPage: SessionsPage;
   let loginPage : LoginPage;
+  let fixtures: DataFixtures;
 
   beforeEach(() :void => {
+    fixtures = new DataFixtures();
     sessionsPage = new SessionsPage();
     loginPage = new LoginPage();
     sessionsPage.visit();
@@ -13,9 +16,9 @@ describe('Sessions spec', () => {
 
   describe('As user', (): void => {
     beforeEach(() => {
-      loginPage.logIn(loginPage.fixtures.userData.email, loginPage.fixtures.userData.password);
-      cy.wait('@login');
-      cy.wait('@sessions');
+      loginPage.logIn(fixtures.userData.email, fixtures.userData.password);
+      cy.wait('@getLogin');
+      cy.wait('@getSession');
 
     });
 
@@ -23,10 +26,10 @@ describe('Sessions spec', () => {
 
       // Test sessions list
       sessionsPage.elements.matCardItems()
-        .should(`have.length`, sessionsPage.fixtures.sessionsData.length)
+        .should(`have.length`, fixtures.sessionsData.length)
         .each((item, index): void => {
-          expect(item.find('mat-card-title')).to.contain(sessionsPage.fixtures.sessionsData[index].name);
-          expect(item.find('mat-card-content p')).to.contain(sessionsPage.fixtures.sessionsData[index].description);
+          expect(item.find('mat-card-title')).to.contain(fixtures.sessionsData[index].name);
+          expect(item.find('mat-card-content p')).to.contain(fixtures.sessionsData[index].description);
           expect(item.find('mat-card-actions button:nth-child(1) span.ml1')).to.contain('Detail');
         })
     })
@@ -35,9 +38,9 @@ describe('Sessions spec', () => {
 
   describe('As admin', () : void => {
     beforeEach(() => {
-      loginPage.logIn(loginPage.fixtures.adminData.email, loginPage.fixtures.adminData.password);
-      cy.wait('@login');
-      cy.wait('@sessions');
+      loginPage.logIn(fixtures.adminData.email, fixtures.adminData.password);
+      cy.wait('@getLogin');
+      cy.wait('@getSession');
     });
 
     it('Show Create and Edit buttons', () : void => {
@@ -47,7 +50,7 @@ describe('Sessions spec', () => {
 
       // Test Edit buttons
       sessionsPage.elements.matCardItems()
-        .should('have.length', sessionsPage.fixtures.sessionsData.length)
+        .should('have.length', fixtures.sessionsData.length)
         .each((item) => {
           expect(item.find('mat-card-actions button:nth-child(2) span.ml1')).to.contain('Edit')
         })

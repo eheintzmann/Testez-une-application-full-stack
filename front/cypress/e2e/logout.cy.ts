@@ -1,26 +1,26 @@
 import { LoginPage } from '../pages/login.page';
 import { headerBar } from "../pages/header.bar";
-import { LogoutPage } from "../pages/logout.page";
+import { DataFixtures } from "../fixtures/data.fixtures";
 
 describe('Logout spec', () : void => {
   let loginPage: LoginPage;
-  let logoutPage: LogoutPage;
+  let fixtures; DataFixtures;
 
   beforeEach(() => {
+    fixtures = new DataFixtures();
     loginPage = new LoginPage();
-    logoutPage = new LogoutPage();
   });
 
   describe('As user', ()  : void=> {
     beforeEach(() => {
       loginPage.visit();
-      loginPage.logIn(loginPage.fixtures.userData.email, loginPage.fixtures.userData.password);
-      cy.wait('@login');
+      loginPage.logIn(fixtures.userData.email, fixtures.userData.password);
+      cy.wait('@getLogin');
     });
 
     it('Logout successful', () : void => {
       cy.url().should('include', '/sessions')
-      cy.wait('@sessions');
+      cy.wait('@getSession');
       headerBar.logoutLnk().click();
       cy.url().should('include', '/').should('not.include', '/sessions');
     })

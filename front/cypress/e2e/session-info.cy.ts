@@ -1,13 +1,16 @@
 import { SessionsPage } from '../pages/sessions.page';
 import { LoginPage } from '../pages/login.page';
 import { SessionInformationsPage } from "../pages/session-info.page";
+import { DataFixtures } from "../fixtures/data.fixtures";
 
 describe('Session Information spec', () : void => {
   let sessionInfoPage: SessionInformationsPage;
   let loginPage : LoginPage;
   let sessionsPage: SessionsPage;
+  let fixtures: DataFixtures;
 
   beforeEach(() : void => {
+    fixtures= new DataFixtures();
     sessionInfoPage = new SessionInformationsPage();
     loginPage = new LoginPage();
     sessionsPage = new SessionsPage();
@@ -16,32 +19,32 @@ describe('Session Information spec', () : void => {
 
   describe('As user', (): void => {
     beforeEach(() => {
-      loginPage.logIn(loginPage.fixtures.userData.email, loginPage.fixtures.userData.password);
-      cy.wait('@login');
-      cy.wait('@sessions');
+      loginPage.logIn(fixtures.userData.email, fixtures.userData.password);
+      cy.wait('@getLogin');
+      cy.wait('@getSession');
       sessionsPage.elements.detailBtns().first().click();
-      cy.wait('@session0');
-      cy.wait('@teacher0');
+      cy.wait('@getSession0');
+      cy.wait('@getTeacher0');
     });
 
     it('Show first session details', () : void => {
 
       // Test sessions list
       sessionInfoPage.elements.sessionNameH1()
-        .should(`contain.text`, sessionInfoPage.titleCase(sessionInfoPage.fixtures.sessionsData[0].name));
+        .should(`contain.text`, sessionInfoPage.titleCase(fixtures.sessionsData[0].name));
       sessionInfoPage.elements.teacherName()
-        .should('contain.text', sessionInfoPage.fixtures.teacherData[0].firstName)
-        .should('contain.text', sessionInfoPage.fixtures.teacherData[0].lastName.toUpperCase())
+        .should('contain.text', fixtures.teachersData[0].firstName)
+        .should('contain.text', fixtures.teachersData[0].lastName.toUpperCase())
     })
   });
 
 
   describe('As admin', () : void => {
     beforeEach(() => {
-      loginPage.logIn(loginPage.fixtures.adminData.email, loginPage.fixtures.adminData.password);
+      loginPage.logIn(fixtures.adminData.email, fixtures.adminData.password);
       sessionsPage.elements.detailBtns().first().click();
-      cy.wait('@session0');
-      cy.wait('@teacher0');
+      cy.wait('@getSession0');
+      cy.wait('@getTeacher0');
     });
 
     it('Show Delete button', () : void => {

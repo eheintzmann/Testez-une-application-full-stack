@@ -1,12 +1,15 @@
 import { LoginPage } from '../pages/login.page';
 import { headerBar } from "../pages/header.bar";
 import { AccountPage } from "../pages/account.page";
+import { DataFixtures } from "../fixtures/data.fixtures";
 
 describe('Logout spec', () : void => {
   let loginPage: LoginPage;
   let accountPage: AccountPage;
+  let fixtures: DataFixtures;
 
   beforeEach((): void => {
+    fixtures = new DataFixtures();
     loginPage = new LoginPage();
     accountPage = new AccountPage();
   });
@@ -14,20 +17,20 @@ describe('Logout spec', () : void => {
   describe('As user', (): void => {
     beforeEach(() => {
       loginPage.visit();
-      loginPage.logIn(loginPage.fixtures.userData.email, loginPage.fixtures.userData.password);
-      cy.wait('@login');
+      loginPage.logIn(fixtures.userData.email, fixtures.userData.password);
+      cy.wait('@getLogin');
     });
 
     it('Logout successful', (): void => {
       cy.url().should('include', '/sessions')
-      cy.wait('@sessions');
+      cy.wait('@getSession');
       headerBar.accountLnk().click();
-      cy.wait('@user1');
+      cy.wait('@getUser1');
       cy.url().should('include', '/me');
       accountPage.elements.nameField()
-        .should('contain.text', `${accountPage.fixtures.userData.firstName} ${accountPage.fixtures.userData.lastName.toUpperCase()}`);
+        .should('contain.text', `${fixtures.userData.firstName} ${fixtures.userData.lastName.toUpperCase()}`);
       accountPage.elements.emailField()
-        .should('contain.text', accountPage.fixtures.userData.email);
+        .should('contain.text', fixtures.userData.email);
     });
   })
 })
