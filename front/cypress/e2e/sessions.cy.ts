@@ -5,13 +5,13 @@ describe('Sessions spec', () => {
   let sessionsPage: SessionsPage;
   let loginPage : LoginPage;
 
-  beforeEach(() => {
+  beforeEach(() :void => {
     sessionsPage = new SessionsPage();
     loginPage = new LoginPage();
     sessionsPage.visit();
   });
 
-  describe('As user', () => {
+  describe('As user', (): void => {
     beforeEach(() => {
       loginPage.logIn(loginPage.fixtures.userData.username, 'text!123');
       cy.wait('@login');
@@ -19,7 +19,7 @@ describe('Sessions spec', () => {
 
     });
 
-    it('Show sessions list', () => {
+    it('Show sessions list', () : void => {
 
       // Test sessions list
       sessionsPage.elements.matCardItems()
@@ -33,14 +33,14 @@ describe('Sessions spec', () => {
   });
 
 
-  describe('As admin', () => {
+  describe('As admin', () : void => {
     beforeEach(() => {
       loginPage.logIn(loginPage.fixtures.adminData.username, 'text!123');
       cy.wait('@login');
       cy.wait('@sessions');
     });
 
-    it('Show Create and Edit buttons', () => {
+    it('Show Create and Edit buttons', () : void => {
 
       // Test Create button
       sessionsPage.elements.createBtn().should('have.text', 'Create')

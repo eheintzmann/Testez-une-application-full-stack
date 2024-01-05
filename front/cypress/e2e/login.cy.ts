@@ -17,7 +17,7 @@ describe('Login spec', () => {
   })
 
 
-  it('Bad credentials', () => {
+  it('Bad credentials', () : void => {
     page.logIn('bad@email.com', 'test!123');
     cy.wait('@login');
 

@@ -2,7 +2,7 @@ import { SessionsPage } from '../pages/sessions.page';
 import { LoginPage } from '../pages/login.page';
 import { SessionInformationsPage } from "../pages/session-info.page";
 
-describe('Session Informations spec', () => {
+describe('Session Information spec', () : void => {
   let sessionInfoPage: SessionInformationsPage;
   let loginPage : LoginPage;
   let sessionsPage: SessionsPage;
@@ -36,7 +36,7 @@ describe('Session Informations spec', () => {
   });
 
 
-  describe('As admin', () => {
+  describe('As admin', () : void => {
     beforeEach(() => {
       loginPage.logIn(loginPage.fixtures.adminData.username, 'text!123');
       sessionsPage.elements.detailBtns().first().click();
@@ -44,7 +44,7 @@ describe('Session Informations spec', () => {
       cy.wait('@teacher0');
     });
 
-    it('Show Delete button', () => {
+    it('Show Delete button', () : void => {
 
       // Test Create button
       sessionInfoPage.elements.deleteBtn()

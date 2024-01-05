@@ -1,6 +1,6 @@
 import { RegisterPage } from '../pages/register.page';
 
-describe('Register spec', () => {
+describe('Register spec', () : void => {
   let page: RegisterPage;
 
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe('Register spec', () => {
   })
 
 
-  it('Register successful', () => {
+  it('Register successful', () : void => {
     page.signUp(
       page.fixtures.userData.firstName,
       page.fixtures.userData.lastName,

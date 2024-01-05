@@ -2,14 +2,14 @@ import { SessionsPage } from '../pages/sessions.page';
 import { LoginPage } from '../pages/login.page';
 import { SessionCreationPage } from "../pages/session-creation.page";
 
-describe('Session Informations spec', () => {
+describe('Session Creation spec', () : void => {
   let loginPage: LoginPage;
   let sessionsPage: SessionsPage;
   let sessionCreationPage: SessionCreationPage;
   const createdSession = {
     name: 'Created session',
     date: '2001-01-01',
-    description: 'Description'
+    description: 'Created description'
   }
 
   beforeEach((): void => {
@@ -21,7 +21,7 @@ describe('Session Informations spec', () => {
   describe('as admin', (): void => {
 
 
-    it('create new session', () => {
+    it('create new session', (): void => {
       sessionsPage.visit();
 
       loginPage.logIn(loginPage.fixtures.adminData.username, 'text!123');
