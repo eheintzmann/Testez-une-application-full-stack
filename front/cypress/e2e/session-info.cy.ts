@@ -16,7 +16,7 @@ describe('Session Information spec', () : void => {
 
   describe('As user', (): void => {
     beforeEach(() => {
-      loginPage.logIn(loginPage.fixtures.userData.username, 'text!123');
+      loginPage.logIn(loginPage.fixtures.userData.email, loginPage.fixtures.userData.password);
       cy.wait('@login');
       cy.wait('@sessions');
       sessionsPage.elements.detailBtns().first().click();
@@ -38,7 +38,7 @@ describe('Session Information spec', () : void => {
 
   describe('As admin', () : void => {
     beforeEach(() => {
-      loginPage.logIn(loginPage.fixtures.adminData.username, 'text!123');
+      loginPage.logIn(loginPage.fixtures.adminData.email, loginPage.fixtures.adminData.password);
       sessionsPage.elements.detailBtns().first().click();
       cy.wait('@session0');
       cy.wait('@teacher0');

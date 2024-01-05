@@ -13,8 +13,8 @@ describe('Register spec', () : void => {
     page.signUp(
       page.fixtures.userData.firstName,
       page.fixtures.userData.lastName,
-      page.fixtures.userData.username,
-      'test!123'
+      'new.user@test.com',
+      'password'
     )
     cy.wait('@register');
 

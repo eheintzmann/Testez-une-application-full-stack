@@ -1,7 +1,10 @@
 {
   "id": 0,
-  "username": "jane.doe@test.com",
+  "email": "jane.doe@test.com",
   "firstName": "Jane",
   "lastName": "Doe",
-  "admin": true
+  "admin": true,
+  "password": "test!123",
+  "createdAt": "2001-01-01",
+  "updatedAt": "2011-01-01"
 }

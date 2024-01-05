@@ -14,7 +14,7 @@ describe('Logout spec', () : void => {
   describe('As user', ()  : void=> {
     beforeEach(() => {
       loginPage.visit();
-      loginPage.logIn(loginPage.fixtures.userData.username, 'test!123');
+      loginPage.logIn(loginPage.fixtures.userData.email, loginPage.fixtures.userData.password);
       cy.wait('@login');
     });
 

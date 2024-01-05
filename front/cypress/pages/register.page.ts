@@ -20,22 +20,15 @@ export class RegisterPage {
 
 
   constructor() {
-    cy.fixture('user').then((data: any) : void => {
+    cy.fixture('user').then((data: any): void => {
       this.fixtures.userData = data;
 
-      cy.fixture('admin').then((data: any) : void => {
+      cy.fixture('admin').then((data: any): void => {
         this.fixtures.adminData = data;
       });
 
-      cy.intercept({method: 'POST', url: '/api/auth/register'}, (req) : void => {
-        if (req.body.email === this.fixtures.userData.username) {
-          req.reply(this.fixtures.userData);
-        } else if (req.body.email === this.fixtures.adminData.username) {
-          req.reply(this.fixtures.adminData);
-        } else {
-          req.reply({ statusCode: 403 });
-        }
-      }).as('register');
+      cy.intercept({method: 'POST', url: '/api/auth/register'}, (req): void => req.reply({statusCode: 201})
+      ).as('register');
     });
   }
 

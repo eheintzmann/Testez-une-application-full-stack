@@ -13,7 +13,7 @@ describe('Sessions spec', () => {
 
   describe('As user', (): void => {
     beforeEach(() => {
-      loginPage.logIn(loginPage.fixtures.userData.username, 'text!123');
+      loginPage.logIn(loginPage.fixtures.userData.email, loginPage.fixtures.userData.password);
       cy.wait('@login');
       cy.wait('@sessions');
 
@@ -35,7 +35,7 @@ describe('Sessions spec', () => {
 
   describe('As admin', () : void => {
     beforeEach(() => {
-      loginPage.logIn(loginPage.fixtures.adminData.username, 'text!123');
+      loginPage.logIn(loginPage.fixtures.adminData.email, loginPage.fixtures.adminData.password);
       cy.wait('@login');
       cy.wait('@sessions');
     });

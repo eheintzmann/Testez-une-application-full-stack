@@ -9,8 +9,8 @@ describe('Login spec', () => {
   })
 
 
-  it('Login successful', () => {
-    page.logIn(page.fixtures.userData.username, 'test!123')
+  it('Login successful', () : void => {
+    page.logIn(page.fixtures.userData.email, page.fixtures.userData.password)
     cy.wait('@login');
 
     cy.url().should('include', '/sessions')

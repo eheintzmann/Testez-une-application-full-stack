@@ -24,7 +24,7 @@ describe('Session Creation spec', () : void => {
     it('create new session', (): void => {
       sessionsPage.visit();
 
-      loginPage.logIn(loginPage.fixtures.adminData.username, 'text!123');
+      loginPage.logIn(loginPage.fixtures.adminData.email, loginPage.fixtures.adminData.password);
       cy.wait('@login')
       cy.wait('@sessions')
 

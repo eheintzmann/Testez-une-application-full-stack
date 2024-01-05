@@ -25,9 +25,9 @@ export class LoginPage {
         this.fixtures.adminData = data;
 
         cy.intercept({method: 'POST', url: '/api/auth/login'}, (req) : void => {
-          if (req.body.email === this.fixtures.userData.username) {
+          if (req.body.email === this.fixtures.userData.email) {
             req.reply(this.fixtures.userData);
-          } else if (req.body.email === this.fixtures.adminData.username) {
+          } else if (req.body.email === this.fixtures.adminData.email) {
             req.reply(this.fixtures.adminData);
           } else {
             req.reply({ statusCode: 403 });
