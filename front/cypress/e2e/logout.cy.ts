@@ -15,7 +15,7 @@ describe('Logout spec', () : void => {
     beforeEach(() => {
       loginPage.visit();
       loginPage.logIn(fixtures.userData.email, fixtures.userData.password);
-      cy.wait('@getLogin');
+      cy.wait('@postLogin');
     });
 
     it('Logout successful', () : void => {

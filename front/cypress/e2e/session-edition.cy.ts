@@ -29,7 +29,7 @@ describe('Session Edition spec', () : void => {
       sessionsPage.visit();
 
       loginPage.logIn(fixtures.adminData.email, fixtures.adminData.password);
-      cy.wait('@getLogin')
+      cy.wait('@postLogin')
       cy.wait('@getSession')
 
       sessionsPage.elements.editBtns().first().click();

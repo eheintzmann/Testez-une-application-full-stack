@@ -14,7 +14,7 @@ describe('Login spec', () => {
 
   it('Login successful', () : void => {
     page.logIn(fixtures.userData.email, fixtures.userData.password)
-    cy.wait('@getLogin');
+    cy.wait('@postLogin');
 
     cy.url().should('include', '/sessions')
   })
@@ -22,7 +22,7 @@ describe('Login spec', () => {
 
   it('Bad credentials', () : void => {
     page.logIn('bad@email.com', 'test!123');
-    cy.wait('@getLogin');
+    cy.wait('@postLogin');
 
     page.elements.errorMessage().should('have.text', 'An error occurred');
   })

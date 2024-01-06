@@ -18,14 +18,14 @@ describe('Logout spec', () : void => {
     beforeEach(() => {
       loginPage.visit();
       loginPage.logIn(fixtures.userData.email, fixtures.userData.password);
-      cy.wait('@getLogin');
+      cy.wait('@postLogin');
     });
 
     it('Logout successful', (): void => {
       cy.url().should('include', '/sessions')
       cy.wait('@getSession');
       headerBar.accountLnk().click();
-      cy.wait('@getUser1');
+      cy.wait(`@getUser${fixtures.userData.id}`);
       cy.url().should('include', '/me');
       accountPage.elements.nameField()
         .should('contain.text', `${fixtures.userData.firstName} ${fixtures.userData.lastName.toUpperCase()}`);

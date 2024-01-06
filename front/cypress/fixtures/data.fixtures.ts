@@ -1,8 +1,9 @@
 export class DataFixtures {
+  usersData: any[];
   userData: any;
   adminData: any;
-  sessionsData: any;
-  teachersData : any;
+  sessionsData: any[];
+  teachersData : any[];
 
 
   constructor() {
@@ -13,31 +14,36 @@ export class DataFixtures {
 
   loadUsersFixtures(): void {
 
-    cy.fixture('user').then((user: any): void => {
-      this.userData = user;
+    cy.fixture('users').then((users: any[]): void => {
+      this.usersData = users;
+      this.userData = users.find((user): boolean => user.admin === false);
+      this.adminData = users.find((user): boolean => user.admin === true);
 
       cy.intercept({
           method: `GET`,
           url: `/api/user/${this.userData.id}`
         }, (req): void => req.reply(this.userData)
-      ).as('getUser1');
+      ).as(`getUser${this.userData.id}`);
 
-      cy.fixture('admin').then((admin: any): void => {
-        this.adminData = admin;
+      cy.intercept({
+          method: `GET`,
+          url: `/api/user/${this.adminData.id}`
+        }, (req): void => req.reply(this.adminData)
+      ).as(`getUser${this.adminData.id}`);
 
-        cy.intercept({method: 'POST', url: '/api/auth/login'}, (req): void => {
-          if (req.body.email === this.userData.email) {
-            req.reply(this.userData);
-          } else if (req.body.email === this.adminData.email) {
-            req.reply(this.adminData);
+      cy.intercept({method: 'POST', url: '/api/auth/login'}, (req): void => {
+        req.reply(this.usersData.find((user): boolean => user.email === req.body.email) || {statusCode: 403});
+      }).as('postLogin');
+
+      cy.intercept({method: 'POST', url: '/api/auth/register'}, (req): void => {
+          if (req.body.email === this.userData.email || req.body.email === this.adminData.email) {
+            req.reply({statusCode: 400})
           } else {
-            req.reply({statusCode: 403});
+            this.usersData.push(req.body);
+            req.reply({statusCode: 201});
           }
-        }).as('getLogin');
-
-        cy.intercept({method: 'POST', url: '/api/auth/register'}, (req): void => req.reply({statusCode: 201})
-        ).as('postRegister');
-      });
+        }
+      ).as('postRegister');
     });
   }
 
@@ -55,7 +61,7 @@ export class DataFixtures {
       cy.intercept({
           method: 'GET',
           url: '/api/session/0'
-        }, (req) : void  => req.reply(this.sessionsData[0])
+        }, (req): void => req.reply(this.sessionsData[0])
       ).as('getSession0');
 
       cy.intercept({
@@ -70,8 +76,13 @@ export class DataFixtures {
         method: 'PUT',
         url: '/api/session/0'
       }, (req): void => {
-        Object.assign(this.sessionsData[0], req.body);
-        req.reply({statusCode: 200});
+        const index: number = this.sessionsData.findIndex((session): boolean => session.id === 0);
+        if (index >= 0) {
+          Object.assign(this.sessionsData[index], req.body);
+          req.reply({statusCode: 200});
+        } else {
+          req.reply({statusCode: 404});
+        }
       }).as('putSession0');
     });
   }
@@ -87,9 +98,11 @@ export class DataFixtures {
       ).as('getTeacher');
 
       cy.intercept({
-          method: 'GET',
-          url: `/api/teacher/0`
-        }, (req) : void  => req.reply(this.teachersData[0])
+        method: 'GET',
+        url: `/api/teacher/0`
+        }, (req) : void  => {
+        req.reply(this.teachersData.find((teacher) => teacher.id === 0) || {statusCode: 404})
+        }
       ).as('getTeacher0');
     });
   }
