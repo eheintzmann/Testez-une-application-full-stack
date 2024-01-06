@@ -4,7 +4,7 @@ export class SessionInformationsPage {
   elements = {
     sessionNameH1 : () => cy.get('mat-card mat-card-title h1'),
     teacherName : () => cy.get('mat-card mat-card-subtitle span'),
-    deleteBtn : () => cy.get('mat-card mat-card-title div div:nth-child(2) button span'),
+    deleteBtn : () => cy.get('mat-card mat-card-title div div:nth-child(2) button span').contains('Delete'),
   }
 
   visit(): void {

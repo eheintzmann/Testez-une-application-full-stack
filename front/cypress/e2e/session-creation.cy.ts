@@ -24,7 +24,7 @@ describe('Session Creation spec', () : void => {
   describe('As admin', (): void => {
 
 
-    it('create new session', (): void => {
+    it('Create new session', (): void => {
       sessionsPage.visit();
 
       loginPage.logIn(fixtures.adminData.email, fixtures.adminData.password);

@@ -84,6 +84,19 @@ export class DataFixtures {
           req.reply({statusCode: 404});
         }
       }).as('putSession0');
+
+      cy.intercept({
+        method: 'DELETE',
+        url: '/api/session/0'
+      }, (req): void => {
+        const index: number = this.sessionsData.findIndex((session): boolean => session.id === 0);
+        if (index >= 0) {
+          this.sessionsData = this.sessionsData.splice(index, 1);
+          req.reply({statusCode: 200});
+        } else {
+          req.reply({statusCode: 404});
+        }
+      }).as('deleteSession0');
     });
   }
 

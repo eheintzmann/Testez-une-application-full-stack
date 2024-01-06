@@ -3,7 +3,7 @@ import { headerBar } from "../pages/header.bar";
 import { AccountPage } from "../pages/account.page";
 import { DataFixtures } from "../fixtures/data.fixtures";
 
-describe('Logout spec', () : void => {
+describe('Account spec', () : void => {
   let loginPage: LoginPage;
   let accountPage: AccountPage;
   let fixtures: DataFixtures;
@@ -21,7 +21,7 @@ describe('Logout spec', () : void => {
       cy.wait('@postLogin');
     });
 
-    it('Logout successful', (): void => {
+    it('Show account', (): void => {
       cy.url().should('include', '/sessions')
       cy.wait('@getSession');
       headerBar.accountLnk().click();

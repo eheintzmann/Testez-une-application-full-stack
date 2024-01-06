@@ -1,6 +1,5 @@
 import { SessionsPage } from '../pages/sessions.page';
 import { LoginPage } from '../pages/login.page';
-import { SessionCreationPage } from "../pages/session-creation.page";
 import { SessionEditionPage } from "../pages/session-edition.page";
 import { DataFixtures } from "../fixtures/data.fixtures";
 
@@ -25,7 +24,7 @@ describe('Session Edition spec', () : void => {
   describe('As admin', (): void => {
 
 
-    it('create new session', () : void => {
+    it('Edit session', () : void => {
       sessionsPage.visit();
 
       loginPage.logIn(fixtures.adminData.email, fixtures.adminData.password);
