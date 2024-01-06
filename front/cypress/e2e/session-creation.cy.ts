@@ -30,6 +30,7 @@ describe('Session Creation spec', () : void => {
       loginPage.logIn(fixtures.adminData.email, fixtures.adminData.password);
       cy.wait('@postLogin')
       cy.wait('@getSession')
+      const originalSessionsLength: number = fixtures.sessionsData.length;
 
       sessionsPage.elements.createBtn().click();
       cy.wait('@getTeacher');
@@ -44,7 +45,7 @@ describe('Session Creation spec', () : void => {
       cy.wait('@getSession')
 
       sessionsPage.elements.matCardItems()
-        .should(`have.length`, fixtures.sessionsData.length + 1)
+        .should(`have.length`, originalSessionsLength + 1)
         .last().as('newSession')
       cy.get('@newSession').find('mat-card-title').should('contain.text', createdSession.name)
       cy.get('@newSession').find('mat-card-content p').should('contain.text', createdSession.description);
