@@ -6,6 +6,7 @@ import com.openclassrooms.starterjwt.models.Teacher;
 import com.openclassrooms.starterjwt.services.TeacherService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -51,6 +52,7 @@ class TeacherControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsTeacher() {
         // GIVEN
         long id = 1;
@@ -67,6 +69,7 @@ class TeacherControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsNotFound() {
         // GIVEN
         long id = 1;
@@ -82,6 +85,7 @@ class TeacherControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsBadRequest() {
         // GIVEN
         String id = "NotANumber";
@@ -96,6 +100,7 @@ class TeacherControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void whenFindAll_thenReturnsTeachersList() {
         // GIVEN
         when(mockTeacherService.findAll()).thenReturn(mockTeacherList);

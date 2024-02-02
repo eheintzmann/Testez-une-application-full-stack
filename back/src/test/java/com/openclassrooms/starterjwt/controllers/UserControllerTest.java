@@ -6,6 +6,7 @@ import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.services.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -58,6 +59,7 @@ class UserControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsUser() {
         // GIVEN
         String id = "1";
@@ -74,6 +76,7 @@ class UserControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsNotFound() {
         // GIVEN
         String id = "0";
@@ -88,6 +91,7 @@ class UserControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsBadRequest() {
         // GIVEN
         String id = "NotANumber";
@@ -101,7 +105,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(value = "mockUser")
+    @Tag("UnitTest")
     void givenId_whenSave_thenDeleteUser() {
         // GIVEN
         String id = "1";
@@ -126,7 +130,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(value = "mockUser")
+    @Tag("UnitTest")
     void givenId_whenSave_thenReturnsNotFound() {
         // GIVEN
         String id = "0";
@@ -141,7 +145,7 @@ class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(value = "mockUser")
+    @Tag("UnitTest")
     void givenId_whenSave_thenReturnsBadRequest() {
         // GIVEN
         String id = "NotANumber";

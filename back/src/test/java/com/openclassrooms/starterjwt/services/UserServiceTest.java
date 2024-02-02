@@ -4,6 +4,7 @@ import com.openclassrooms.starterjwt.models.User;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -36,6 +37,7 @@ class UserServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsUser() {
         // GIVEN
         long id = 1;
@@ -50,6 +52,7 @@ class UserServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsNull() {
         // GIVEN
         long id = 0;
@@ -64,6 +67,7 @@ class UserServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenDelete_thenReturnsVoid() {
         // GIVEN
         long id = 1;

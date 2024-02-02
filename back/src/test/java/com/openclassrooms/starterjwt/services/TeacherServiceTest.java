@@ -4,6 +4,7 @@ import com.openclassrooms.starterjwt.models.Teacher;
 import com.openclassrooms.starterjwt.repository.TeacherRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -39,6 +40,7 @@ class TeacherServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsTeacher() {
         // GIVEN
         long id = 1;
@@ -53,6 +55,7 @@ class TeacherServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsNull() {
         // GIVEN
         long id = 0;
@@ -67,6 +70,7 @@ class TeacherServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void whenFindAll_thenReturnsTeachers() {
         // GIVEN
         when(mockTeacherRepository.findAll()).thenReturn(mockTeachers);

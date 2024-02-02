@@ -21,7 +21,7 @@ class AuthControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @Tag("Integration")
+    @Tag("IntegrationTest")
     @DisplayName("Login : successful user connection")
     void givenALoginRequest_whenLogin_thenReturnsAJwtToken() throws Exception {
         // GIVEN
@@ -39,7 +39,7 @@ class AuthControllerTest {
     }
 
     @Test
-    @Tag("Integration")
+    @Tag("IntegrationTest")
     @DisplayName("Login : successful admin connection")
     void givenAnAdminLoginRequest_whenLogin_thenReturnsAJwtToken() throws Exception {
         // GIVEN
@@ -56,7 +56,7 @@ class AuthControllerTest {
     }
 
     @Test
-    @Tag("Integration")
+    @Tag("IntegrationTest")
     @DisplayName("Login : connection error")
     void givenALoginRequest_whenLogin_thenReturnsUnauthorized() throws Exception {
         // GIVEN
@@ -72,7 +72,7 @@ class AuthControllerTest {
     }
 
     @Test
-    @Tag("Integration")
+    @Tag("IntegrationTest")
     @DisplayName("Register : successful account creation")
     void givenASignupRequest_whenRegister_thenReturnsOK() throws Exception {
         // GIVEN
@@ -91,7 +91,7 @@ class AuthControllerTest {
     }
 
     @Test
-    @Tag("Integration")
+    @Tag("IntegrationTest")
     @DisplayName("Register : already existing user")
     void givenASignupRequest_whenRegister_thenReturnsError() throws Exception {
         // GIVEN
@@ -110,7 +110,7 @@ class AuthControllerTest {
     }
 
     @Test
-    @Tag("Integration")
+    @Tag("IntegrationTest")
     @DisplayName("Register : invalid email")
     void givenAnInvalidSignupRequest_whenRegister_thenReturnsBadRequest() throws Exception {
         // GIVEN

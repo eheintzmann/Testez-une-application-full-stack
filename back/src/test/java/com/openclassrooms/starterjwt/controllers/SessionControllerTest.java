@@ -6,6 +6,7 @@ import com.openclassrooms.starterjwt.models.Session;
 import com.openclassrooms.starterjwt.services.SessionService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -52,6 +53,7 @@ class SessionControllerTest {
 
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsSession() {
         // GIVEN
         String id = "1";
@@ -68,6 +70,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsNotFound() {
         // GIVEN
         String id = "0";
@@ -83,6 +86,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenFindById_thenReturnsBadRequest() {
         // GIVEN
         String id = "NotANumber";
@@ -97,6 +101,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void whenFindAll_thenReturnsTeachersList() {
         // GIVEN
         when(mockSessionService.findAll()).thenReturn(mockSessionList);
@@ -112,6 +117,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenSession_whenCreate_thenReturnsSession() {
         // GIVEN
         when(this.mockSessionMapper.toEntity(mockSessionDto)).thenReturn(mockSession);
@@ -129,6 +135,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenSession_whenUpdate_thenReturnsSession() {
         // GIVEN
         String id = "1";
@@ -147,6 +154,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenSession_whenUpdate_thenReturnsBadRequest() {
         // GIVEN
         String id = "NotANumber";
@@ -162,6 +170,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenSave_thenReturnsDelete() {
         // GIVEN
         String id = "1";
@@ -176,6 +185,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenSave_thenReturnsNotFound() {
         // GIVEN
         String id = "0";
@@ -190,6 +200,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenSave_thenReturnsBadRequest() {
         // GIVEN
         String id = "NotANumber";
@@ -203,6 +214,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenIdAndUserId_whenParticipate_thenReturnsOk() {
         // GIVEN
         String id = "1";
@@ -221,6 +233,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenIdAndUserId_whenParticipate_thenReturnsBadRequest() {
         // GIVEN
         String id = "NotANumber";
@@ -235,6 +248,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenIdAndUserId_whenNoLongerParticipate_thenReturnsOK() {
         // GIVEN
         String id = "1";
@@ -253,6 +267,7 @@ class SessionControllerTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenIdAndUserId_whenNoLongerParticipate_thenReturnsBadRequest() {
         // GIVEN
         String id = "NotANumber";

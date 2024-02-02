@@ -8,6 +8,7 @@ import com.openclassrooms.starterjwt.repository.SessionRepository;
 import com.openclassrooms.starterjwt.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -61,6 +62,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenSession_whenSave_thenReturnsSession() {
         //GIVEN
         when(mockSessionRepository.save(mockSession)).thenReturn(mockSession);
@@ -74,6 +76,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenDelete_thenReturnsVoid() {
         // GIVEN
         long id = 1;
@@ -87,6 +90,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void whenFindAll_thenReturnsSessions() {
         // GIVEN
         when(mockSessionRepository.findAll()).thenReturn(mockSessions);
@@ -100,6 +104,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenGetById_thenReturnsSession() {
         // GIVEN
         long id = 1;
@@ -114,6 +119,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenId_whenGetById_thenReturnsNull() {
         // GIVEN
         long id = 0;
@@ -129,6 +135,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenIdAndUserId_whenParticipate_thenParticipate() {
         // GIVEN
         long id = 1;
@@ -145,6 +152,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenInvalidId_whenParticipate_ThrowNotFoundException() {
         // GIVEN
         long id = 0;
@@ -159,6 +167,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenInvalidUserId_whenParticipate_ThrowNotFoundException() {
         // GIVEN
         long id = 1;
@@ -175,6 +184,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenIdAndUserId_whenNoLongerParticipate_thenNoLongerParticipate() {
         // GIVEN
         long id = 1;
@@ -192,6 +202,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenIdAndUserId_whenNoLongerParticipate_ThrowBadRequestException() {
         // GIVEN
         long id = 1;
@@ -202,6 +213,7 @@ class SessionServiceTest {
     }
 
     @Test
+    @Tag("UnitTest")
     void givenInvalidId_whenNoLongerParticipate_ThrowNotFoundException() {
         // GIVEN
         long id = 0;
