@@ -17,7 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -157,5 +156,4 @@ class UserControllerTest {
         verify(this.mockUserService, times(0)).delete(anyLong());
         assertThat(result).isEqualTo(ResponseEntity.badRequest().build());
     }
-
 }
