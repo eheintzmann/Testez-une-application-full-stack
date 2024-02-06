@@ -120,6 +120,12 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
+						<configuration>
+							<excludes>
+								<exclude>com/openclassrooms/starterjwt/*Application.*</exclude>
+								<exclude>com/openclassrooms/starterjwt/dto/*</exclude>
+							</excludes>
+						</configuration>
 					</execution>
 
 					<execution>
@@ -140,11 +146,6 @@
 									</limits>
 								</rule>
 							</rules>
-							<excludes>
-								<exclude>com/openclassrooms/starterjwt/dto/*</exclude>
-								<exclude>com/openclassrooms/starterjwt/models/*</exclude>
-								<exclude>com/openclassrooms/starterjwt/payload/**</exclude>
-							</excludes>
 						</configuration>
 					</execution>
 
