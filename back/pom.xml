@@ -122,8 +122,9 @@
 						</goals>
 						<configuration>
 							<excludes>
-								<exclude>com/openclassrooms/starterjwt/*Application.*</exclude>
+								<exclude>com/openclassrooms/starterjwt/SpringBootSecurityJwtApplication.*</exclude>
 								<exclude>com/openclassrooms/starterjwt/dto/*</exclude>
+								<exclude>com/openclassrooms/starterjwt/mapper/*</exclude>
 							</excludes>
 						</configuration>
 					</execution>
@@ -146,6 +147,11 @@
 									</limits>
 								</rule>
 							</rules>
+							<excludes>
+								<exclude>com/openclassrooms/starterjwt/SpringBootSecurityJwtApplication.*</exclude>
+								<exclude>com/openclassrooms/starterjwt/dto/*</exclude>
+								<exclude>com/openclassrooms/starterjwt/mapper/*</exclude>
+							</excludes>
 						</configuration>
 					</execution>
 
