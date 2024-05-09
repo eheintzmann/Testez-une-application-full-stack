@@ -1,5 +1,6 @@
-version: '3.4'
+name: db
 services:
+
   mysql:
     image: mysql:8.0
     command: --default-authentication-plugin=caching_sha2_password
@@ -8,9 +9,12 @@ services:
     ports:
       - "${MYSQL_PORT:-3306}:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       timeout: 10s
       retries: 20
+    volumes:
+      - "./ressources/sql/script.sql:/docker-entrypoint-initdb.d/1.sql:ro"
+
   adminer:
     image: adminer
     restart: always
