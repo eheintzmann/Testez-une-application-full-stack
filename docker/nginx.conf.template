@@ -1,0 +1,19 @@
+server {
+    listen 80;
+    include /etc/nginx/mime.types;
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+
+     location /api/ {
+        proxy_pass http://localhost:${TOMCAT_PORT}/api/;
+     }
+
+    location / {
+        autoindex on;
+        try_files $uri$args $uri$args/ $uri/ /index.html;
+    }
+
+    location ~ \.js {
+        add_header Content-Type text/javascript;
+    }
+}

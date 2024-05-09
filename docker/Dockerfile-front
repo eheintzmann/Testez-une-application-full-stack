@@ -1,0 +1,20 @@
+# STAGE 1: Install
+FROM node:16 AS install
+
+WORKDIR /usr/src/app
+COPY front/package*.json front/yarn.lock ./
+RUN npm install --omit-dev
+COPY front/ .
+
+# STAGE 2: Build
+FROM install AS build
+
+RUN npm install -g @angular/cli@14.2.1
+RUN ng build --configuration=production
+
+# STAGE 3: Run
+FROM nginx:stable-alpine AS run
+
+RUN rm -rf /usr/share/nginx/html/*
+# COPY docker/nginx.conf.template /etc/nginx/nginx.conf.template
+COPY --from=build /usr/src/app/dist/yoga /usr/share/nginx/html

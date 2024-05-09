@@ -1,0 +1,13 @@
+back/
+ressources/
+.idea/
+.vscode/
+.editorconfig
+README.md
+front/.angular/
+front/node_modules/
+front/dist/
+front/README.md
+front/out.json
+front/.nyc_output
+front/.editorconfig
