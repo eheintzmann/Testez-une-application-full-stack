@@ -33,8 +33,6 @@ Edit this new file, and modify the variables
     MYSQL_DATABASE=test   # specify the name of a database to be created and used
     MYSQL_USER=user       # create a new user that will be granted superuser access on the created database
     MYSQL_PASSWORD=123456 # specify the password of the created user
-    MYSQL_PORT=3306       # specify the port number of MySQL server
-    ADMINER_PORT=9090     # specify the port number of Adminer server
     ```
 
 
