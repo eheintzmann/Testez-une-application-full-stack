@@ -124,7 +124,7 @@ This is not the recommended way for a production server._
 
 
 ### Frontend
-1. Install [Node.js](https://nodejs.org/) 18 and [npm](https://www.npmjs.com/get-npm)
+1. Install [Node.js](https://nodejs.org/) 16 and [yarn](https://yarnpkg.com/)
 
 
 2. Go inside `front` folder
@@ -136,13 +136,13 @@ This is not the recommended way for a production server._
 3. Install dependencies
 
     ```sh
-    npm install
+    yarn install
     ```
 
 4. Launch Front-end
 
     ```sh
-    npm run start
+    yarn run start
     ```
 
 5. Navigate to
