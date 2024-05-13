@@ -215,7 +215,7 @@ This is not the recommended way for a production server._
 5. Generate coverage report (you should launch all e2e tests before)
 
     ```sh
-    yarn run e2e --headless
+    yarn run e2e --headless --watch=false
     yarn run e2e:coverage
     ```
     Report is available at `front/coverage/lcov-report/index.html`
