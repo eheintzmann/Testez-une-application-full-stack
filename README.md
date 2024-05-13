@@ -161,7 +161,13 @@ This is not the recommended way for a production server._
     cd front
     ```
 
-3. Launching tests 
+3. Install dependencies
+
+    ```sh
+    yarn install
+    ```
+
+4. Launching tests 
     - Launching **unit** tests
 
         ```sh
@@ -174,7 +180,7 @@ This is not the recommended way for a production server._
         yarn run test int
         ```
 
-4. Launching all tests with **coverage**
+5. Launching all tests with **coverage**
 
     ```sh
     yarn run test --coverage
@@ -193,13 +199,20 @@ This is not the recommended way for a production server._
     cd front
     ```
 
-3. Launching e2e tests
+3. Install dependencies
+
+    ```sh
+    yarn install
+    ```
+
+
+4. Launching e2e tests
 
     ```sh
      yarn run e2e
     ```
 
-4. Generate coverage report (you should launch all e2e tests before)
+5. Generate coverage report (you should launch all e2e tests before)
 
     ```sh
     yarn run e2e --headless
