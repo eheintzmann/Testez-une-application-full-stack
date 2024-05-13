@@ -120,7 +120,7 @@ This is not the recommended way for a production server._
 
     3. API is accessible at
     
-        [http://localhost:9000/api/](http://localhost:9000)
+        [http://localhost:8080/api/](http://localhost:8080)
 
 
 ### Frontend
@@ -152,57 +152,67 @@ This is not the recommended way for a production server._
 
 ### Frontend tests
 
-1. Go inside `front` folder
+1. Install [Node.js](https://nodejs.org/) 16 and [yarn](https://yarnpkg.com/)
+
+
+2. Go inside `front` folder
 
     ```sh
     cd front
     ```
 
-2. Launching only **unit** tests
+3. Launching tests 
+    - Launching **unit** tests
+
+        ```sh
+        yarn run test unit
+        ```
+
+    - Launching **integration** tests
+
+        ```sh
+        yarn run test int
+        ```
+
+4. Launching all tests with **coverage**
 
     ```sh
-    npm run test unit
-    ```
-
-3. Launching only **integration** tests
-
-    ```sh
-    npm run test int
-    ```
-
-4. Launching tests with **coverage**
-
-    ```sh
-    npm run test -- --coverage
+    yarn run test --coverage
     ```
 
     Report is available at `front/coverage/jest/lcov-report/index.html`
 
 ### End2End tests
-1. Go inside `front` folder
+
+1. Install [Node.js](https://nodejs.org/) 16 and [yarn](https://yarnpkg.com/)
+
+
+2. Go inside `front` folder
 
     ```sh
     cd front
     ```
 
-2. Launching e2e test
+3. Launching e2e tests
 
     ```sh
-     npm run e2e
+     yarn run e2e
     ```
 
-3. Generate coverage report (you should launch all e2e tests before)
+4. Generate coverage report (you should launch all e2e tests before)
 
     ```sh
-    npm run e2e -- --headless
-    npm run e2e:coverage
+    yarn run e2e --headless
+    yarn run e2e:coverage
     ```
     Report is available at `front/coverage/lcov-report/index.html`
 
 ### Backend tests
 
-1. Install [Maven](https://maven.apache.org/)
-
+1. Install Java Development Kit 11
+     1. Download and Install [OpenJDK 11](https://jdk.java.net/archive)
+     2. Download and install [Maven](https://maven.apache.org)
+ 
 
 2. Go inside `back` folder
 
